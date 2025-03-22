@@ -7,7 +7,6 @@ export const protectRoute = async (req,res,next) =>{
 
         // check token
         const token = req.cookies.jwt
-        console.log("Cookies:", req.cookies); // Debugging
 
         if(!token){
             return res.status(401).json({message : "Unauthorized No Token Provided"})
@@ -19,7 +18,6 @@ export const protectRoute = async (req,res,next) =>{
       if (!decoded){
           return res.status(401).json({message : "Unauthorized Token Verification Failed"})
       }
-      console.log("Decoded Token:", decoded); // Debugging
 
 
       const user = await User.findById(decoded.userId).select("-password")  //exclude password
