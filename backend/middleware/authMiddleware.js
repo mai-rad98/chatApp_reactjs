@@ -15,6 +15,10 @@ export const protectRoute = async (req,res,next) =>{
 
       //verify token
       const decoded = jwt.verify(token,process.env.JWT_SECRET)
+      req.user = decoded; // Ensure user ID is set
+      console.log("Decoded token:", decoded);
+
+
       if (!decoded){
           return res.status(401).json({message : "Unauthorized Token Verification Failed"})
       }
